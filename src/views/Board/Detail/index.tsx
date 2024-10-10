@@ -4,7 +4,7 @@ import FavoriteItem from "components/FavoriteItem";
 import { Board, CommentListItem, FavoriteListItem } from "types/interface";
 import { commentListMock, favoriteListMock } from "mocks";
 import CommentItem from "components/CommentItem";
-import Pagination from "components/Pagination";
+import Pagination from "components/PaginationDetail";
 import defaultProfileImage from "assets/image/default-profile-image.png";
 import { useLoginUserStore } from "stores";
 import { useNavigate, useParams } from "react-router-dom";

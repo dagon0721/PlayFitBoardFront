@@ -141,11 +141,9 @@ export default function Search() {
           {count !== 0 && (
             <Pagination
               currentPage={currentPage}
-              currentSection={currentSection}
               setCurrentPage={setCurrentPage}
-              setCurrentSection={setCurrentSection}
-              viewPageList={viewPageList}
-              totalSection={totalSection}
+              totalItems={count} // 총 게시물 수
+              itemsPerPage={5} // 한 페이지당 게시물 수
             />
           )}
         </div>
