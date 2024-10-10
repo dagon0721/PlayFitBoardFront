@@ -26,8 +26,13 @@ import {
   PatchBoardResponseDto,
   GetSearchBoardListResponseDto,
   GetUserBoardListResponseDto,
+  GetLatestBoardListResponseDto,
+  GetTop3BoardListResponseDto,
 } from "./response/board";
-import { GetRelationListResponseDto } from "./search";
+import {
+  GetPopularListResponseDto,
+  GetRelationListResponseDto,
+} from "./search";
 import {
   PatchNicknameRequestDto,
   PatchProfileImageRequestDto,
@@ -75,6 +80,8 @@ export const signUpRequest = async (requestBody: SignUpRequestDto) => {
 
 const GET_BOARD_URL = (boardNumber: number | string) =>
   `${API_DOMAIN}/board/${boardNumber}`;
+const GET_LATEST_BOARD_LIST_URL = () => `${API_DOMAIN}/board/latest-list`;
+const GET_TOP_3_BOARD_LIST_URL = () => `${API_DOMAIN}/board/top-3`;
 const GET_SEARCH_BOARD_LIST_URL = (
   searchWord: string,
   preSearchWord: string | null
@@ -105,6 +112,36 @@ export const getBoardRequest = async (boardNumber: number | string) => {
     .get(GET_BOARD_URL(boardNumber))
     .then((response) => {
       const responseBody: GetBoardResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      if (!error.response) return null;
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+  return result;
+};
+
+export const getLatestBoardListRequest = async () => {
+  const result = await axios
+    .get(GET_LATEST_BOARD_LIST_URL())
+    .then((response) => {
+      const responseBody: GetLatestBoardListResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      if (!error.response) return null;
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+  return result;
+};
+
+export const getTop3BoardListRequest = async () => {
+  const result = await axios
+    .get(GET_TOP_3_BOARD_LIST_URL())
+    .then((response) => {
+      const responseBody: GetTop3BoardListResponseDto = response.data;
       return responseBody;
     })
     .catch((error) => {
@@ -303,6 +340,23 @@ export const getRelationListRequest = async (searchWord: string) => {
     .get(GET_RELATION_LIST_URL(searchWord))
     .then((response) => {
       const responseBody: GetRelationListResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      if (!error.response) return null;
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+  return result;
+};
+
+const GET_POPULAR_LIST_URL = () => `${API_DOMAIN}/search/popular-list`;
+
+export const getPopularListRequest = async () => {
+  const result = await axios
+    .get(GET_POPULAR_LIST_URL())
+    .then((response) => {
+      const responseBody: GetPopularListResponseDto = response.data;
       return responseBody;
     })
     .catch((error) => {

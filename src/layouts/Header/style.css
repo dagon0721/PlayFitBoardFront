@@ -6,6 +6,14 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Cafe24Decobox";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2405-3@1.1/Cafe24Decobox.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
 #header {
   padding: 20px 0;
 
@@ -39,9 +47,15 @@
   letter-spacing: -0.4px;
 }
 
+.icon-box {
+  width: 45px;
+  height: 45px;
+}
+
 .header-right-box {
   display: flex;
   align-items: center;
+  height: auto;
   gap: 15px;
 }
 
@@ -50,12 +64,15 @@
   border-radius: 43px;
   padding: 0 10px 0 12px;
 
-  width: 223px;
+  width: 100%;
+  max-width: 223px;
   height: 30px;
+  min-height: 30px;
 
   display: flex;
   align-items: center;
   gap: 5px;
+  box-sizing: border-box;
 }
 
 .header-search-input {
@@ -64,6 +81,7 @@
   border: none;
   background: none;
   outline: none;
+  padding: 0;
 
   color: rgba(0, 0, 0, 1);
 

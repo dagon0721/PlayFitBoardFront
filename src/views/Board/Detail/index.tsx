@@ -47,7 +47,6 @@ export default function BoardDetail() {
 
   // function: 네비게이트 함수 //
   const navigator = useNavigate();
-
   // function: increaase view count response 처리 함수 //
   const increaseViewCountResponse = (
     responseBody: IncreaseViewCountResponseDto | ResponseDto | null

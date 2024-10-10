@@ -11,30 +11,50 @@
     opacity: 1;
     background-image: url("/src/assets/image/auth-bg/auth-background1.png");
   }
+
   16.67% {
     opacity: 1;
     background-image: url("/src/assets/image/auth-bg/auth-background2.png");
   }
+
   33.33% {
     opacity: 1;
     background-image: url("/src/assets/image/auth-bg/auth-background3.png");
   }
+
   50% {
     opacity: 1;
     background-image: url("/src/assets/image/auth-bg/auth-background4.png");
   }
+
   66.67% {
     opacity: 1;
     background-image: url("/src/assets/image/auth-bg/auth-background5.png");
   }
+
   83.33% {
     opacity: 1;
     background-image: url("/src/assets/image/auth-bg/auth-background6.png");
   }
+
   100% {
     opacity: 1;
     background-image: url("/src/assets/image/auth-bg/auth-background1.png");
   }
+}
+
+#auth-wrapper:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  background-image: url("/src/assets/image/auth-bg/auth-background1.png"),
+    url("/src/assets/image/auth-bg/auth-background2.png"),
+    url("/src/assets/image/auth-bg/auth-background3.png"),
+    url("/src/assets/image/auth-bg/auth-background4.png"),
+    url("/src/assets/image/auth-bg/auth-background5.png"),
+    url("/src/assets/image/auth-bg/auth-background6.png");
 }
 
 #auth-wrapper {
@@ -69,8 +89,10 @@
   height: 100%;
 
   display: flex;
-  justify-content: center; /* 수평 중앙 정렬 */
-  align-items: center; /* 수직 중앙 정렬 */
+  justify-content: center;
+  /* 수평 중앙 정렬 */
+  align-items: center;
+  /* 수직 중앙 정렬 */
 }
 
 .auth-jumbotron-contents {
@@ -93,9 +115,8 @@
 }
 
 .auth-jumbotron-text {
-  font-family: "GimhaeGayaR", sans-serif;
   color: rgba(255, 255, 255, 1);
-  font-size: 36px;
+  font-size: 40px;
   font-weight: 300;
   line-height: 140%;
   letter-spacing: -0.8px;
@@ -123,7 +144,7 @@
   border-radius: 10px;
   padding: 50px 50px 30px;
 
-  background-color: rgba(255, 255, 255, 1);
+  background-color: rgba(255, 255, 255, 0.9);
   box-shadow: 0px 4px 47px 0px rgba(0, 0, 0, 0.25);
 }
 
@@ -183,6 +204,7 @@
 .auth-description-box {
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
 
 .auth-description {
@@ -234,4 +256,98 @@
   font-size: 14px;
   font-weight: 600;
   line-height: 140%;
+}
+
+.find-id-pw-card {
+  border-radius: 10px;
+  padding: 40px;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0px 4px 47px rgba(0, 0, 0, 0.25);
+  display: flex;
+  /* Flexbox로 레이아웃 조정 */
+  flex-direction: column;
+  /* 세로 방향으로 정렬 */
+  gap: 20px;
+  /* 요소 간의 간격 */
+}
+
+.tab-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 10px 0;
+  border: none;
+  background-color: #f0f0f0;
+  color: gray;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  border-radius: 30px;
+  margin: 0 5px;
+}
+
+.tab-button.active {
+  background-color: black;
+  /* 활성화된 버튼 색상 */
+  font-weight: bold;
+  color: white;
+}
+
+.find-id-form,
+.find-pw-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+input {
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px;
+  background-color: black;
+  /* 버튼 색상 */
+  border: none;
+  border-radius: 30px;
+  color: white;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  padding: 1rem;
+}
+
+button:hover {
+  background-color: black;
+  /* 버튼 호버 색상 */
+  color: white;
+}
+
+.auth-description-box {
+  margin-top: 20px;
+  /* 설명 박스 위쪽 여백 */
+}
+
+.auth-description {
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 140%;
+}
+
+.auth-description-link {
+  color: rgba(0, 0, 0, 1);
+  cursor: pointer;
+  font-weight: 600;
 }
