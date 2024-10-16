@@ -28,6 +28,7 @@ import {
   GetUserBoardListResponseDto,
   GetLatestBoardListResponseDto,
   GetTop3BoardListResponseDto,
+  GetLikedBoardsResponseDto,
 } from "./response/board";
 import {
   GetPopularListResponseDto,
@@ -106,6 +107,24 @@ const PUT_FAVORITE_URL = (boardNumber: number | string) =>
   `${API_DOMAIN}/board/${boardNumber}/favorite`;
 const DELETE_BOARD_URL = (boardNumber: number | string) =>
   `${API_DOMAIN}/board/${boardNumber}`;
+// 유저가 좋아요를 누른 게시물 리스트 가져오기
+const GET_LIKED_BOARDS_URL = (email: string) =>
+  `${API_DOMAIN}/board/user/${encodeURIComponent(email)}/liked-boards`;
+
+export const fetchLikedBoards = async (email: string) => {
+  const result = await axios
+    .get(GET_LIKED_BOARDS_URL(email))
+    .then((response) => {
+      const responseBody: GetLikedBoardsResponseDto = response.data;
+      return responseBody;
+    })
+    .catch((error) => {
+      if (!error.response) return null;
+      const responseBody: ResponseDto = error.response.data;
+      return responseBody;
+    });
+  return result;
+};
 
 export const getBoardRequest = async (boardNumber: number | string) => {
   const result = await axios

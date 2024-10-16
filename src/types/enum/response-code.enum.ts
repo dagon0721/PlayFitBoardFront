@@ -9,6 +9,7 @@ enum ResponseCode {
   DUPLICATE_TEL_NUMBER = "DT",
   NOT_EXISTED_USER = "NU",
   NOT_EXISTED_BOARD = "NB",
+  NO_LIKED_BOARDS = "NL", // 추가된 상수
   INVALID_BIRTH_DATE = "IBD", // 생년월일 유효성 검사 실패
 
   // HTTP Status 401

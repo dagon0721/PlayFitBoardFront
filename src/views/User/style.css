@@ -120,10 +120,21 @@
 
 .user-bottom-title {
   color: rgba(0, 0, 0, 1);
-
+  display: flex; /* Flexbox를 사용하여 가로 배치 */
+  align-items: center; /* 수직 가운데 정렬 */
+  gap: 20px; /* 요소 간의 간격 */
   font-size: 24px;
   font-weight: 500;
   line-height: 140%;
+}
+
+.user-bottom-title div {
+  cursor: pointer; /* 커서를 포인터로 변경 */
+  transition: transform 0.2s; /* 애니메이션 효과 추가 */
+}
+
+.user-bottom-title div:hover {
+  transform: scale(1.1); /* 커서가 올라갔을 때 살짝 커짐 */
 }
 
 .user-bottom-contents-box {

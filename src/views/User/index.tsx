@@ -8,6 +8,7 @@ import BoardItem from "components/BoardItem";
 import { BOARD_PATH, BOARD_WRITE_PATH, MAIN_PATH, USER_PATH } from "constant";
 import { useLoginUserStore } from "stores";
 import {
+  fetchLikedBoards,
   fileUploadRequest,
   getUserBoardListRequest,
   getUserRequest,
@@ -26,7 +27,10 @@ import {
 } from "apis/request/user";
 import { useCookies } from "react-cookie";
 import { usePagination } from "hooks";
-import { GetUserBoardListResponseDto } from "apis/response/board";
+import {
+  GetLikedBoardsResponseDto,
+  GetUserBoardListResponseDto,
+} from "apis/response/board";
 import Pagination from "components/Pagination";
 
 // component: 유저 화면 컴포넌트 //
@@ -39,6 +43,10 @@ export default function User() {
   const [cookies, setCookie] = useCookies();
   // state: 마이페이지 여부 상태 //
   const [isMyPage, setMyPage] = useState<boolean>(false);
+  // state: 좋아요 게시물 상태 //
+  const [likedBoards, setLikedBoards] = useState<BoardListItem[]>([]);
+  // state: 좋아요 게시물 표시 여부 상태 추가 //
+  const [showLikedBoards, setShowLikedBoards] = useState<boolean>(false);
 
   // function: 네비게이트 함수 //
   const navigate = useNavigate();
@@ -245,9 +253,7 @@ export default function User() {
   };
 
   // component: 유저 화면 하단 컴포넌트 //
-
   const UserBottom = () => {
-    // state: 페이지네이션 관련 상태 //
     const {
       currentPage,
       currentSection,
@@ -258,8 +264,8 @@ export default function User() {
       setCurrentSection,
       setTotalList,
     } = usePagination<BoardListItem>(5);
-    // state: 게시물 개수 상태 //
     const [count, setCount] = useState<number>(0);
+    const [favoriteCount, setFavoriteCount] = useState<number>(0);
 
     // function: get user board list response 처리 함수 //
     const getUserBoardListResponse = (
@@ -280,12 +286,48 @@ export default function User() {
       setCount(userBoardList.length);
     };
 
+    // function: get liked boards response 처리 함수 //
+    const getLikedBoardsResponse = (
+      responseBody: GetLikedBoardsResponseDto | ResponseDto | null
+    ) => {
+      if (!responseBody) return;
+      const { code } = responseBody;
+      if (code === "NU") {
+        alert("존재하지 않는 유저입니다.");
+        navigate(MAIN_PATH());
+        return;
+      }
+      if (code === "DBE") alert("데이터베이스 오류입니다.");
+      if (code !== "SU") return;
+
+      const { likedBoards } = responseBody as GetLikedBoardsResponseDto;
+      setLikedBoards(likedBoards);
+      setShowLikedBoards(true);
+      setFavoriteCount(likedBoards.length);
+    };
+
+    // event handler: 내 게시물 또는 게시물 버튼 클릭 이벤트 처리 //
+    const onMyBoardsClick = () => {
+      if (userEmail) {
+        // userEmail이 정의되어 있는 경우에만 실행
+        setShowLikedBoards(false); // 좋아요 게시물 숨기기
+        getUserBoardListRequest(userEmail).then(getUserBoardListResponse);
+      } else {
+        alert("유저 이메일이 정의되지 않았습니다."); // 에러 처리
+      }
+    };
+
+    // event handler: "좋아요를 누른 게시물" 버튼 클릭 이벤트 처리 //
+    const onShowLikedBoardsClick = () => {
+      if (!userEmail) return;
+      fetchLikedBoards(userEmail).then(getLikedBoardsResponse);
+    };
+
     // event handler: 사이드 카드 클릭 이벤트 처리 //
     const onSideCardClickHandler = () => {
       if (isMyPage) navigate(BOARD_PATH() + "/" + BOARD_WRITE_PATH());
       else if (loginUser) navigate(USER_PATH(loginUser.email));
     };
-
     // effect: userEmail path variable이 변경될 때마다 실행할 함수 //
     useEffect(() => {
       if (!userEmail) return;
@@ -297,13 +339,33 @@ export default function User() {
       <div id="user-bottom-wrapper">
         <div className="user-bottom-container">
           <div className="user-bottom-title">
-            {isMyPage ? "내 게시물 " : "게시물 "}
-            <span className="emphasis">{count}</span>
+            <div onClick={onMyBoardsClick}>
+              {isMyPage ? "내 게시물 " : "게시물 "}
+            </div>
+            <div className="user-bottom-liked" onClick={onShowLikedBoardsClick}>
+              좋아요 리스트
+            </div>
           </div>
+
           <div className="user-bottom-contents-box">
-            {count === 0 ? (
-              <div className="user-bottom-contents-nothing">
-                {"게시물이 없습니다."}
+            {showLikedBoards ? (
+              <div className="user-bottom-contents">
+                {likedBoards.length === 0 ? (
+                  <div className="user-bottom-contents-nothing">
+                    {"좋아요를 누른 게시물이 없습니다."}
+                  </div>
+                ) : (
+                  likedBoards.map((boardListItem) => (
+                    <div
+                      key={boardListItem.boardNumber}
+                      onClick={() =>
+                        onBoardItemClick(boardListItem.boardNumber)
+                      }
+                    >
+                      <BoardItem boardListItem={boardListItem} />
+                    </div>
+                  ))
+                )}
               </div>
             ) : (
               <div className="user-bottom-contents">
@@ -349,8 +411,8 @@ export default function User() {
               <Pagination
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
-                totalItems={count} // 총 게시물 수
-                itemsPerPage={5} // 한 페이지당 게시물 수
+                totalItems={count}
+                itemsPerPage={5}
               />
             )}
           </div>
@@ -359,7 +421,6 @@ export default function User() {
     );
   };
 
-  // render: 유저 화면 컴포넌트 렌더링 //
   return (
     <>
       <UserTop />
