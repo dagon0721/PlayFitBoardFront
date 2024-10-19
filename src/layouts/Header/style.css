@@ -65,7 +65,7 @@
   padding: 0 10px 0 12px;
 
   width: 100%;
-  max-width: 223px;
+  max-width: 250px;
   height: 30px;
   min-height: 30px;
 
@@ -85,7 +85,7 @@
 
   color: rgba(0, 0, 0, 1);
 
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
-  line-height: 140%;
+  line-height: 100%;
 }

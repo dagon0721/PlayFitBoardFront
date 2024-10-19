@@ -144,6 +144,15 @@
   justify-content: center;
 }
 
+.icon-box-huge {
+  width: 100px;
+  height: 100px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .icon-button {
   border-radius: 50% 50%;
 

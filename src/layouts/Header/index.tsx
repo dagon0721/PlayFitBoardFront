@@ -308,7 +308,7 @@ export default function Header() {
     <div id="header">
       <div className="header-container">
         <div className="header-left-box" onClick={onLogoClickHandler}>
-          <div className="icon-box">
+          <div className="icon-box-huge">
             <div className="icon logo-dark-icon"></div>
           </div>
           {/* <div className="header-logo">{"PlayFit"}</div> */}
