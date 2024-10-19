@@ -105,12 +105,11 @@
 }
 
 .auth-logo-icon {
-  width: 150px;
-  height: 150px;
+  width: 400px;
+  height: 400px;
   background-image: url("/src/assets/image/logo-light.png");
   background-position: center;
   background-size: contain;
-  filter: brightness(0) invert(1);
   margin-bottom: -20px;
 }
 

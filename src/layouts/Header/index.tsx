@@ -311,7 +311,7 @@ export default function Header() {
           <div className="icon-box">
             <div className="icon logo-dark-icon"></div>
           </div>
-          <div className="header-logo">{"PlayFit"}</div>
+          {/* <div className="header-logo">{"PlayFit"}</div> */}
         </div>
         <div className="header-right-box">
           {(isAuthPage ||

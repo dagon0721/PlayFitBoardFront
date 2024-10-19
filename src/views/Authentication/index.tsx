@@ -704,8 +704,8 @@ export default function Authentication() {
           <div className="auth-jumbotron-contents">
             <div className="auth-logo-icon"></div>
             <div className="auth-jumbotron-text-box">
-              <div className="auth-jumbotron-text">{"운동 커뮤니티"}</div>
-              <div className="auth-jumbotron-text">{"Play Fit"}</div>
+              {/* <div className="auth-jumbotron-text">{"운동 커뮤니티"}</div>
+              <div className="auth-jumbotron-text">{"Play Fit"}</div> */}
             </div>
           </div>
         </div>

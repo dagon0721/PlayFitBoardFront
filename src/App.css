@@ -198,6 +198,8 @@
 
 .logo-dark-icon {
   background-image: url(assets/image/logo-light.png);
+  width: 200px;
+  height: 100px;
 }
 
 .search-light-icon {
