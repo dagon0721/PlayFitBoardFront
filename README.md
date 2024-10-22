@@ -1,4 +1,4 @@
-## 백엔드 https://github.com/dagon0721/PlayFit
+## 백엔드 https://github.com/dagon0721/PlayFitBoardBack
 ## 프론트엔드 https://github.com/dagon0721/PlayFitBoardFront
 - 백엔드 , 프론트엔드를 둘다 다운로드 받으신 후 한 폴더에 넣어주시기 바랍니다.
 
