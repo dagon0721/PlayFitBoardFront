@@ -29,7 +29,8 @@
   - React
   - TypeScript
   - Fetch API
- 
+  - Html
+  - CSS
 ### BE
   - Jave version 17
   - Spring Boot(Gradle 2.7.14)
